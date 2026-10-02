@@ -49,21 +49,21 @@ Categorias de las variables:
 
 #ESTRUCTURA GENERAL DEL REPOSITORIO
 
-proyecto-visualizacion/
-|
-|-- data/
-| |-- raw/
-| |-- processed/
-|
-|-- notebooks/
-|  |-- 01_exploracion.ipynb
-|
-|-- src/
-|
-|-- figures/
-|
-|-- app/
-|
-|-- README.md
-|
-|-- .gitignore
+proyecto-visualizacion/<br>
+|<br>
+|-- data/<br>
+| |-- raw/<br>
+| |-- processed/<br>
+|<br>
+|-- notebooks/<br>
+|  |-- 01_exploracion.ipynb<br>
+|<br>
+|-- src/<br>
+|<br>
+|-- figures/<br>
+|<br>
+|-- app/<br>
+|<br>
+|-- README.md<br>
+|<br>
+|-- .gitignore<br>
