@@ -5,7 +5,7 @@ st.set_page_config(page_title="Contexto y Datos", layout="wide")
 
 st.title("Contexto, Estructura y Calidad de los Datos")
 
-CSV_PATH = "data/raw/dft-road-casualty-statistics-collision-last-5-years.csv"
+CSV_PATH = "data/raw/datos_colisiones_granbretaña_2021-2025.csv"
 
 @st.cache_data
 def contar_universo_total(ruta):
@@ -19,13 +19,13 @@ def cargar_muestra(ruta):
         'day_of_week', 'weather_conditions', 'light_conditions', 'speed_limit',
         'road_type', 'road_surface_conditions', 'urban_or_rural_area'
     ]
-    return pd.read_csv(ruta, nrows=100000, usecols=cols)
+    return pd.read_csv(ruta, usecols=cols)
 
 try:
     total_universo = contar_universo_total(CSV_PATH)
     df = cargar_muestra(CSV_PATH)
 except Exception:
-    CSV_PATH = "dft-road-casualty-statistics-collision-last-5-years.csv"
+    CSV_PATH = "datos_colisiones_granbretaña_2021-2025.csv"
     total_universo = contar_universo_total(CSV_PATH)
     df = cargar_muestra(CSV_PATH)
 
@@ -44,13 +44,36 @@ st.markdown("""
 """)
 
 st.subheader("2. Vista Preliminar de Variables Clave")
-cols_vista = ['collision_index', 'collision_year', 'date', 'time', 'collision_severity', 'speed_limit', 'urban_or_rural_area']
+cols_vista = [
+        'collision_index', 'collision_severity', 'collision_year', 'date', 'time',
+        'day_of_week', 'weather_conditions', 'light_conditions', 'speed_limit',
+        'road_type', 'road_surface_conditions', 'urban_or_rural_area'
+    ]
 st.dataframe(df[cols_vista].head(8), use_container_width=True)
 
 st.subheader("3. Estructura de Tipos y Detección de Inconsistencias")
+
 calidad_df = pd.DataFrame({
     'Tipo de Variable': df.dtypes.astype(str),
-    'Valores Nulos (NaN)': df.isna().sum(),
-    'Códigos Desconocidos (-1, 9, 99)': df.isin([-1, 9, 99]).sum()
+    'Valores NaN': df.isna().sum(),
+    'Codigos Desconocidos (-1, 9, 99)': df.isin([-1, 9, 99]).sum()
 })
+
+codigos_oficiales = {
+    'collision_index': 'Clave alfanumerica (sin nulos)',
+    'collision_severity': 'Sin codigos faltantes (1, 2, 3 obligatorios)',
+    'collision_year': 'Año completo (sin nulos)',
+    'date': 'Formato fecha (DD/MM/AAAA)',
+    'day_of_week': 'Dia 1 a 7 (sin nulos)',
+    'time': 'Formato hora (HH:MM)',
+    'road_type': '-1 (Faltante), 9 (Desconocido)',
+    'speed_limit': '-1 (Faltante), 99 (Desconocido)',
+    'light_conditions': '-1 (Faltante), 7 (Oscuridad desconocida)',
+    'weather_conditions': '-1 (Faltante), 9 (Desconocido)',
+    'road_surface_conditions': '-1 (Faltante), 9 (Desconocido)',
+    'urban_or_rural_area': '-1 (Faltante), 3 (No asignado)'
+}
+
+calidad_df['Codigo Oficial de Faltante'] = calidad_df.index.map(codigos_oficiales)
+
 st.dataframe(calidad_df, use_container_width=True)
