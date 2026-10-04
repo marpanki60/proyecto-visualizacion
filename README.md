@@ -79,9 +79,9 @@ Los siniestros viales constituyen un problema crítico de salud pública y segur
  **Pregunta de Investigación:**  
  **¿En qué medida los factores de infraestructura vial (límite de velocidad, tipo de calzada) y las condiciones ambientales (iluminación, meteorología) inciden en la severidad de las colisiones viales en Gran Bretaña, y cómo ha evolucionado este riesgo relativo a lo largo del período 2021–2025?**
 
-* **Variable Objetivo ($Y$):** Gravedad de la colisión (`collision_severity` decodificada en `severidad`: Leve, Grave, Fatal).
-* **Variables Explicativas ($X$):** Límite de velocidad (`speed_limit`), entorno geográfico (`entorno`), tipo de calzada (`tipo_via`), condiciones meteorológicas (`clima`) e iluminación (`iluminacion`).
-* **Dimensión Temporal ($T$):** Año del evento (`collision_year`, 2021–2025), fecha completa y franja horaria intradía.
+* **Variable Objetivo ($Y$):** Gravedad de la colisión (collision_severity decodificada en severidad: Leve, Grave, Fatal).
+* **Variables Explicativas ($X$):** Límite de velocidad (speed_limit), entorno geográfico (entorno), tipo de calzada (tipo_via), condiciones meteorológicas (clima) e iluminación (iluminacion).
+* **Dimensión Temporal ($T$):** Año del evento (collision_year, 2021–2025), fecha completa y franja horaria intradía.
 
 ---
 
@@ -99,9 +99,9 @@ El proyecto utiliza los registros oficiales del sistema **STATS19** del Departam
 1. Los microdatos públicos provienen del portal oficial británico de seguridad vial ([data.gov.uk - Road Safety Data / STATS19](https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-accidents-safety-data)).
 2. Para reproducir el entorno:
    * Colocar el archivo bruto CSV original en la ruta:  
-     `data/raw/datos_colisiones_granbretaña_2021-2025.csv`
-   * Ejecutar el pipeline de limpieza y filtrado ejecutando el notebook `notebooks/01_exploracion.ipynb` (o el script de preprocesamiento), el cual generará automáticamente la versión optimizada en:  
-     `data/processed/datos_colisiones_procesados.csv`
+     data/raw/datos_colisiones_granbretaña_2021-2025.csv
+   * Ejecutar el pipeline de limpieza y filtrado ejecutando el notebook notebooks/01_exploracion.ipynb (o el script de preprocesamiento), el cual generará automáticamente la versión optimizada en:  
+     data/processed/datos_colisiones_procesados.csv
 
 ---
 
@@ -110,6 +110,5 @@ El proyecto utiliza los registros oficiales del sistema **STATS19** del Departam
 Para desplegar y visualizar la plataforma interactiva localmente:
 
 1. **Clonar el repositorio:**
-   ```bash
-   git clone <URL_DE_TU_REPOSITORIO>
+   git clone <URL_DEL_REPOSITORIO>
    cd proyecto-visualizacion
